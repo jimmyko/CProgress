@@ -27,15 +27,31 @@
 
 
 	  base.methods = {
-	  	init: function () {
-
-
+		loadImages: function(next) {
 			//Images
 			base.img1 = new Image();
+			base.img1.onload = function() {
+				base.methods._loadImage2(next);
+			}
 			base.img1.src = base.options.img1;
+		},
+		_loadImage2: function(next) {
 			base.img2 = new Image();
+			base.img2.onload = function() {
+				base.methods._imagesLoaded(next);
+			}
 			base.img2.src = base.options.img2;
+		},
+		_imagesLoaded: function(next) {
+			base.img1.onload = undefined;
+			base.img2.onload = undefined;
+			next();
+		},
 
+	  	init: function () {
+			base.methods.loadImages(base.methods._init_next);
+		},
+		_init_next: function() {
 			base.width = base.img1.width;
 			base.height = base.img1.height;
 
@@ -82,13 +98,9 @@
 			
 		},
 		reloadImages : function(){
-
-			//Images
-			base.img1 = new Image();
-			base.img1.src = base.options.img1;
-			base.img2 = new Image();
-			base.img2.src = base.options.img2;
-
+			base.methods.loadImages(base.methods._reloadImages_next);
+		},
+		_reloadImages_next: function() {
 			base.width = base.img1.width;
 			base.height = base.img1.height;
 
@@ -153,11 +165,11 @@
 
 					if(base.options.percent<=base.options.limit){
 						setTimeout(base.methods.draw,base.options.speed);
-						base.$percent.html(base.options.percent.toFixed(0));
+						base.$percent.html(base.options.percent.toFixed(0) + "%");
 
 						base.options.onProgress(base.options.percent.toFixed(0));
 					}else{
-						base.$percent.html(base.options.limit);
+						base.$percent.html(base.options.limit + "%");
 						base.methods.coreDraw();
 						base.options.onProgress(base.options.limit);
 						base.options.onComplete(base.options.limit);
