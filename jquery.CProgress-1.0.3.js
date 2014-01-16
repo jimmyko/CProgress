@@ -20,7 +20,7 @@
 
   $.ns.cprogress = function ( el, options) {
     var base = this;
-    // Access to jQuery and DOM 
+    // Access to jQuery and DOM
     base.el  = el;
     base.$el = $(el);
     base.$el.data( "ns.cprogress" , base );
@@ -46,7 +46,9 @@
       base.$progress.css('opacity','0.0');
 
       //percent div
-      base.$percent = $('<div />').addClass('percent');
+      base.$value = $('<span />').addClass('value');
+      base.$suffix = $('<span>'+base.options.suffix+'</span>').addClass('suffix');
+      base.$percent = $('<div />').addClass('percent').append(base.$value).append(base.$suffix);
       //hide?
 
       //canvas area
@@ -71,9 +73,9 @@
       base.ctx.fillStyle = "rgba(0,0,0,0.0)";
 
       //others
-      base.options.percent=base.options.percent%100;
-      base.i=(base.options.percent*(Math.PI*2))/100;
-      base.j=0;
+      base.options.percent = base.options.percent%100;
+      base.i = (base.options.percent*(Math.PI*2))/100;
+      base.j = 0;
       base.stop = 0;
 
       //call draw method
@@ -147,10 +149,10 @@
 
           if ( base.options.percent <= base.options.limit ) {
             setTimeout( base.methods.draw, base.options.speed );
-            base.$percent.html( base.options.percent.toFixed(0) );
+            base.$value.html( base.options.percent.toFixed(0) );
             base.options.onProgress( base.options.percent.toFixed(0) );
           } else {
-            base.$percent.html( base.options.limit );
+            base.$value.html( base.options.limit );
             base.methods.coreDraw();
             base.options.onProgress( base.options.limit );
             base.options.onComplete( base.options.limit );
