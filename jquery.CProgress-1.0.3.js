@@ -210,13 +210,14 @@ $.ns.cprogress.defaultOptions = {
   percent :0,
 
   // Variables
-  bg: 'v1.png',
-  fg: 'v2.png',
-  speed: 50,
-  limit : 48,
-  loop : false,
+  bg          : 'bg.png',
+  fg          : 'fg.png',
+  speed       : 50,
+  limit       : 48,
+  loop        : false,
   showPercent : true,
-  PIStep : 0.05,
+  PIStep      : 0.05,
+  suffix      : '%',
 
   // Callback function
   onInit : function(){},
