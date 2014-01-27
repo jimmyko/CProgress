@@ -4,9 +4,14 @@ A jQuery plugin that makes circular progress bar in selected element.
 
 * Plugin website: <http://p.ar2oor.pl/cprogress/>
 
-> Please note that there is changes on parameters.
-> * `img1` is changed to `bg`
-> * `img2` is changed to `fg`
+> Please note that there is some changes on parameters.
+>
+> ##### Parameters changed:
+> * `img1` is changed to `bg`.
+> * `img2` is changed to `fg`.
+>
+> ##### Parameters newly added:
+> * `suffix` with default value '%'.
 
 ## Features
 
